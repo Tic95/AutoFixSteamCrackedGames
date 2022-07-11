@@ -3,28 +3,39 @@ import os
 import patoolib
 
 listobj = os.listdir()
-numb_file = len(listobj)
-import os
 absolute_path = os.path.abspath(__file__)
-print("Full path: " + absolute_path)
-print("Directory Path: " + os.path.dirname(absolute_path))
 
 
-for x in range(numb_file):
+for x in range(len(listobj)):
     testif = (".rar" in listobj[x])
     
     if testif == True:
         
-        
-        
-        newlistobj = listobj[x].replace(".rar","")
+        if (".part1" in listobj[x]) == True:
+            
+            
+            
+            newlistobj = listobj[x].replace(".rar","")
         
 
-        newlistobj = newlistobj.replace(" ","")
-        newlistobj = newlistobj.replace(".","")
-        os.mkdir(newlistobj)
-        patoolib.extract_archive(str(listobj[x]), outdir=os.path.dirname(absolute_path)+"/"+newlistobj) #extract the rar file
-        os.remove(listobj[x])     #remove the rar file after extraction 
+            newlistobj = newlistobj.replace(" ","")
+            newlistobj = newlistobj.replace(".","")
+            os.mkdir(newlistobj)
+            patoolib.extract_archive(str(listobj[x]), outdir=os.path.dirname(absolute_path)+"/"+newlistobj) #extract the rar file
+            os.remove(listobj[x])
+        elif (".part" in listobj[x]):
+            
+            os.remove(listobj[x])               
+            
+        else:
+            newlistobj = listobj[x].replace(".rar","")
+        
+
+            newlistobj = newlistobj.replace(" ","")
+            newlistobj = newlistobj.replace(".","")
+            os.mkdir(newlistobj)
+            patoolib.extract_archive(str(listobj[x]), outdir=os.path.dirname(absolute_path)+"/"+newlistobj) #extract the rar file
+            os.remove(listobj[x])     #remove the rar file after extraction 
 
 
 listobjafter = os.listdir()
